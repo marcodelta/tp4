@@ -6,17 +6,23 @@
 package tp4;
 
 import java.util.*;
+
 /**
  *
- * @author marc & raphael
+ * @author rapha
  */
-public class Tp4 {
+public class Fonds {
+    
+public double amount;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+//Constructeur par défaut
+public Fonds() {
+    amount=0;
+}
+
+//COnstructeur avec paramètre
+public Fonds(double a) {
+    amount=a;
+}
     
 }
