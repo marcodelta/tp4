@@ -11,12 +11,14 @@ import tp4.Fonds;
  *
  * @author marc
  */
-public class test implements Comparable<Fonds>{
-
+public abstract class test implements Comparable<Fonds>{
+    
     public int compareTo(Fonds t,Object obj) {
-    if(this.size > t.amount)
+        
+     Fonds f = (Fonds)obj ;  
+    if(f.amount > t.amount)
     {return 1;}
-    else if( this.size <t.amount )
+    else if( f.amount == t.amount )
     {return 0;}
     else
     {return -1; }
@@ -24,11 +26,15 @@ public class test implements Comparable<Fonds>{
     }
     
     public boolean equals(Fonds t, Object obj){
-        if(t.amount == (double)obj)
-        {return true;}
-        else
-        { return false; }
-    
+        
+         if (!(obj  instanceof Fonds))  
+         return false ;  
+      
+     Fonds f = (Fonds)obj ;  
+     if(f.amount == t.amount)
+     return true  ;  
+     else
+         return false;
 }
 
 }
