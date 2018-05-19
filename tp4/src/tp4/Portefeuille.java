@@ -22,23 +22,54 @@ public Portefeuille() {
     i = new HashMap<>() ;
 }
 // A blinder !
-public double recherchefond(String s){ 
-    Fonds fo = new Fonds();
-    fo=f.get(s);
+public double recherchefond(String c) throws FondInexistant{ 
+    if(!f.containsKey(c))
+    {
+        throw new FondInexistant("La clé entrée ne correspond à aucun fond");
+    }
+    else
+    {
+        return f.get(c).amount; 
+    }
     
-    return fo.amount; 
 }
 // A blinder !
-public Instrument rechercheinstru(String s){
+public Instrument rechercheinstru(String c){
     Instrument instru = new Instrument();
-    instru=i.get(s);
+    instru=i.get(c);
     
     return instru;
 }
 //A blinder
-public void ajoutfond(String c, double m) {
+public void ajoutfond(String c, double m) throws FondExistant {
+    
+    try {
+        
+        Fonds t = this.recherchefond(c);
+        throw new FondExistant("La clé entrée correspond déjà à un fond existant");
+    
+    }
+    catch(FondInexistant fi) {
+        
+    }
     Fonds fo = new Fonds(m);
     f.put(c,fo);
+}
+
+public void ajoutinstru(String c, Fonds fo) {
+    Instrument instru = new Instrument();
+    instru.ajoutfond(fo);
+    i.put(c, instru);
+}
+
+public void supprimerfond(String c) {
+    f.remove(c);
+}
+
+public void supprimerinstru(String c) {
+    this.rechercheinstru(c).collect.clear(); //On vide la collection de fonds
+    i.remove(c);
+    
 }
 
 }
