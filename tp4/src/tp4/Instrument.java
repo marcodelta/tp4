@@ -27,7 +27,7 @@ public void ajoutfond(Fonds f){
 
 public void trier(Fonds f)
 {
-       // Collections.sort(collect,f.compareTo(f));
+       Collections.sort(collect);
 
 }
 

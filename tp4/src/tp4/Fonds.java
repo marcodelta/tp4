@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author rapha
  */
-public class Fonds {
+public class Fonds implements Comparable<Fonds> {
     
 public double amount;
 
@@ -25,6 +25,7 @@ public Fonds(double a) {
     amount=a;
 }
  
+@Override
    public int compareTo(Fonds t) {
   
     if(this.amount > t.amount)
@@ -39,7 +40,7 @@ public Fonds(double a) {
     public boolean equals(Fonds t){
         
   
-     if(this.amount == t.amount)
+     if(t.amount == t.amount)
      return true  ;  
      else
              
