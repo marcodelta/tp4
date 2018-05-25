@@ -24,7 +24,7 @@ public Fonds() {
 public Fonds(double a) {
     amount=a;
 }
-
+ 
    public int compareTo(Fonds t) {
   
     if(this.amount > t.amount)
@@ -46,6 +46,4 @@ public Fonds(double a) {
     return false;
 }
 
-      
-    
 }

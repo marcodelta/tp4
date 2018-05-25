@@ -21,9 +21,9 @@ public Portefeuille() {
     f = new HashMap<>() ;
     i = new HashMap<>() ;
 }
-// A blinder !
+
 public double recherchefond(String c) throws FondInexistant{ 
-    if(!f.containsKey(c))
+    if(!f.containsKey(c)) //Si la Hashmap ne contient pas de Fonds en c
     {
         throw new FondInexistant("La clé entrée ne correspond à aucun fond");
     }
@@ -33,42 +33,80 @@ public double recherchefond(String c) throws FondInexistant{
     }
     
 }
-// A blinder !
-public Instrument rechercheinstru(String c){
-    Instrument instru = new Instrument();
-    instru=i.get(c);
-    
-    return instru;
+
+public Instrument rechercheinstru(String c) throws InstruInexistant{
+    if(!i.containsKey(c)) //Si la Hashmap ne contient pas d'instruments en c
+    {
+        throw new InstruInexistant("La clé entrée ne correspond à aucun instrument");
+    }
+    else
+    {
+        return i.get(c);
+    }
 }
-//A blinder
+
 public void ajoutfond(String c, double m) throws FondExistant {
     
     try {
         
-        Fonds t = this.recherchefond(c);
-        throw new FondExistant("La clé entrée correspond déjà à un fond existant");
+        if(f.containsKey(c)){ //Si la Hashmap contient déjà un Fond en c
+            throw new FondExistant("La clé entrée correspond déjà à un fond existant");
+        }
+        Fonds t = new Fonds();
+        t.amount = this.recherchefond(c);
+        
+        
     
     }
     catch(FondInexistant fi) {
+        Fonds fo = new Fonds(m);
+        f.put(c,fo); //Ajoute le fond avec la clé c
         
     }
-    Fonds fo = new Fonds(m);
-    f.put(c,fo);
+    
 }
 
-public void ajoutinstru(String c, Fonds fo) {
-    Instrument instru = new Instrument();
-    instru.ajoutfond(fo);
-    i.put(c, instru);
+public void ajoutinstru(String c, Fonds fo) throws InstruExistant {
+    
+    try {
+        
+        if(i.containsKey(c)){ //Si la Hashmap contient déjà un instrument en c
+            throw new InstruExistant("La clé entrée correspond déjà à un instrument existant");
+        }
+        Instrument ins = new Instrument();
+        ins = this.rechercheinstru(c);
+        
+        
+    
+    }
+    catch(InstruInexistant ii) {
+        Instrument instru = new Instrument();
+        instru.ajoutfond(fo); //Ajoute le fond dans l'Array de l'instrument
+        i.put(c, instru); //Ajoute l'instrument avec la clé c
+        
+    }
+    
+    
 }
 
 public void supprimerfond(String c) {
-    f.remove(c);
+    try {
+        Fonds fo = new Fonds();
+        fo.amount=recherchefond(c);
+        f.remove(c); //On supprime le fond de la Hashmap
+    }
+    catch(FondInexistant fi) {}
+    
 }
 
 public void supprimerinstru(String c) {
+    try{
     this.rechercheinstru(c).collect.clear(); //On vide la collection de fonds
-    i.remove(c);
+    i.remove(c); //On supprime l'instrument de la Hashmap
+    }
+    catch(InstruInexistant ii){
+        
+    }
     
 }
 

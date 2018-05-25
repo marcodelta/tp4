@@ -17,18 +17,18 @@ public ArrayList<Fonds> collect;
 public Fonds f;
 
 public Instrument() {
-    collect = new ArrayList<Fonds>();
-    f = new Fonds();
-    
+    collect = new ArrayList<Fonds>(); //ArrayListe de Fonds
+     f = new Fonds();
 }
 
 public void ajoutfond(Fonds f){
-    collect.add(f);
+    collect.add(f); //Ajoute un fond à l'ArrayList
 }
 
-public void trier(Fonds f,Object obj)
+public void trier(Fonds f)
 {
        // Collections.sort(collect,f.compareTo(f));
 
 }
+
 }
